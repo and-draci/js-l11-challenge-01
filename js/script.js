@@ -8,7 +8,7 @@ const img = document.querySelector(".img");
 const getImage= async function(){
     const res= await fetch("https://picsum.photos/v2/list?limit=100");
     const images= await res.json ();
-    console.log(images);
+   // console.log(images);
 
     selectRandomImage(images);
 };
@@ -18,5 +18,22 @@ const selectRandomImage = function(images){
   //  console.log(randomIndex);
     const randomImage = images[randomIndex];
    // console.log(randomImage);
+   displayImage(randomImage);
 };
-getImage();
+
+//Display the image
+
+const displayImage= function(randomImage){
+    const author = randomImage.author;
+    const imageAddress= randomImage.download_url;
+    authorSpan.innerText = author;
+    img.src = imageAddress;
+    imgDiv.classList.remove("hide");
+};
+
+//Add click event
+
+button.addEventListener ("click", function(){
+    getImage();  
+});
+
